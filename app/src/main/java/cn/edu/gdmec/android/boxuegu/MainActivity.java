@@ -1,4 +1,4 @@
-package cn.edu.gemec.android.boxuegu;
+package cn.edu.gdmec.android.boxuegu;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
