@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.MediaController;
@@ -49,9 +50,17 @@ public class VideoPlayActivity extends AppCompatActivity {
             Toast.makeText(this, "本地没有此视频，暂无法播放", Toast.LENGTH_SHORT).show();
             return;
         }
-        String uri = "android.resource://" + getPackageName() + "/" + R.raw.video11;
-        videoView.setVideoPath(uri);
-        videoView.start();
+        if (position==0){
+            String uri = "android.resource://" + getPackageName() + "/" + R.raw.video11;
+            videoView.setVideoPath(uri);
+            videoView.start();
+        }else if(position==1){
+            String uri = "android.resource://" + getPackageName() + "/" + R.raw.beyond;
+            videoView.setVideoPath(uri);
+            videoView.start();
+        }
+
+
     }
     /**
      * 点击后退键
