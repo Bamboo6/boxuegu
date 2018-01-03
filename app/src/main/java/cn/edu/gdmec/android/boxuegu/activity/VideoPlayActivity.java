@@ -30,7 +30,7 @@ public class VideoPlayActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         //获取从播放记录界面传递过来的视频地址
         videoPath = getIntent().getStringExtra("videoPath");
-        position=getIntent().getIntExtra("position",0);
+        position=getIntent().getIntExtra("position",1);
         init();
     }
     /**
@@ -51,11 +51,17 @@ public class VideoPlayActivity extends AppCompatActivity {
             return;
         }
         if (position==0){
+            Log.i("hahahah",videoPath);
             String uri = "android.resource://" + getPackageName() + "/" + R.raw.video11;
             videoView.setVideoPath(uri);
             videoView.start();
         }else if(position==1){
+            Log.i("hahahah",videoPath);
+            String path = "R.raw."+videoPath;
             String uri = "android.resource://" + getPackageName() + "/" + R.raw.beyond;
+            String uri1 = "android.resource://" + getPackageName() + "/" + path;
+            Log.i("---------path",uri);
+            Log.i("---------path",uri1);
             videoView.setVideoPath(uri);
             videoView.start();
         }

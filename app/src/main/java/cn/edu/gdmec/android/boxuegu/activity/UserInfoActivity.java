@@ -95,16 +95,19 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_back:
-            this.finish();
-            break;
+                this.finish();
+                break;
+            case R.id.rl_head:
+                Intent intent = new Intent(this,EditIconActivity.class);
+                startActivity(intent);
+                break;
             case R.id.rl_nickName:
                 String name = tv_nickName.getText().toString();
                 Bundle bdName = new Bundle();
                 bdName.putString("content",name);
                 bdName.putString("title","昵称");
                 bdName.putInt("flag",1);
-                enterActivityForResult(ChangeUserInfoActivity.class,
-                        CHANGE_NICKNAME,bdName);
+                enterActivityForResult(ChangeUserInfoActivity.class, CHANGE_NICKNAME,bdName);
                 break;
             case R.id.rl_sex:
                 String sex = tv_sex.getText().toString();
