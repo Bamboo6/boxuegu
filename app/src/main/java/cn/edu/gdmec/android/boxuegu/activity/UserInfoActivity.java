@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
     private TextView tv_back;
     private TextView tv_main_title;
     private RelativeLayout rl_title_bar;
+    private RelativeLayout rl_head;
     private RelativeLayout rl_nickName;
     private RelativeLayout rl_sex;
     private RelativeLayout rl_signature;
@@ -53,6 +55,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         rl_title_bar = (RelativeLayout) findViewById(R.id.title_bar);
         rl_title_bar.setBackgroundColor(Color.parseColor("#30B4FF"));
         rl_nickName = (RelativeLayout) findViewById(R.id.rl_nickName);
+        rl_head = (RelativeLayout) findViewById(R.id.rl_head);
         rl_sex = (RelativeLayout) findViewById(R.id.rl_sex);
         rl_signature = (RelativeLayout) findViewById(R.id.rl_signature);
         tv_nickName = (TextView) findViewById(R.id.tv_nickName);
@@ -82,6 +85,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
     }
     private void setListener() {
         tv_back.setOnClickListener(this);
+        rl_head.setOnClickListener(this);
         rl_nickName.setOnClickListener(this);
         rl_sex.setOnClickListener(this);
         rl_signature.setOnClickListener(this);
@@ -100,6 +104,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
             case R.id.rl_head:
                 Intent intent = new Intent(this,EditIconActivity.class);
                 startActivity(intent);
+                Log.i("------click-----","dianidandian");
                 break;
             case R.id.rl_nickName:
                 String name = tv_nickName.getText().toString();
@@ -108,6 +113,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
                 bdName.putString("title","昵称");
                 bdName.putInt("flag",1);
                 enterActivityForResult(ChangeUserInfoActivity.class, CHANGE_NICKNAME,bdName);
+                Log.i("------click-----","dianidandian");
                 break;
             case R.id.rl_sex:
                 String sex = tv_sex.getText().toString();
