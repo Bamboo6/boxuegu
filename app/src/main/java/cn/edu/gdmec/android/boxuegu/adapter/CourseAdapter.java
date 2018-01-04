@@ -2,12 +2,14 @@ package cn.edu.gdmec.android.boxuegu.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -77,12 +79,14 @@ public class CourseAdapter extends BaseAdapter {
                         vh.iv_left_img.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent intent = new Intent(mContext,
-                                        VideoListActivity.class);
-                                intent.putExtra("id",bean.id);
-                                intent.putExtra("intro",bean.intro);
-                                mContext.startActivity(intent);
-
+                                if (readLoginStatus()) {
+                                    Intent intent = new Intent(mContext, VideoListActivity.class);
+                                    intent.putExtra("id", bean.id);
+                                    intent.putExtra("intro", bean.intro);
+                                    mContext.startActivity(intent);
+                                }else {
+                                    Toast.makeText(mContext, "您还未登录，请先登录", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         });
                         break;
@@ -93,11 +97,14 @@ public class CourseAdapter extends BaseAdapter {
                         vh.iv_right_img.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent intent = new Intent(mContext,
-                                        VideoListActivity.class);
-                                intent.putExtra("id",bean.id);
-                                intent.putExtra("intro",bean.intro);
-                                mContext.startActivity(intent);
+                                if (readLoginStatus()) {
+                                    Intent intent = new Intent(mContext, VideoListActivity.class);
+                                    intent.putExtra("id", bean.id);
+                                    intent.putExtra("intro", bean.intro);
+                                    mContext.startActivity(intent);
+                                }else {
+                                    Toast.makeText(mContext, "您还未登录，请先登录", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         });
                         break;
@@ -108,6 +115,12 @@ public class CourseAdapter extends BaseAdapter {
         }
 
         return view;
+    }
+
+    private boolean readLoginStatus() {
+        SharedPreferences sp = mContext.getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
+        boolean isLogin = sp.getBoolean("isLogin",false);
+        return isLogin;
     }
 
     private void setRightImg(int id, ImageView iv_right_img) {

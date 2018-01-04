@@ -2,11 +2,13 @@ package cn.edu.gdmec.android.boxuegu.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -28,6 +30,13 @@ public class ExercisesAdapter extends BaseAdapter{
         this.ebl = ebl;
         notifyDataSetChanged();
     }
+
+    private boolean readLoginStatus() {
+        SharedPreferences sp = mContext.getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
+        boolean isLogin = sp.getBoolean("isLogin",false);
+        return isLogin;
+    }
+
     @Override
     public int getCount() {
         return ebl == null ? 0 : ebl.size();
@@ -70,12 +79,14 @@ public class ExercisesAdapter extends BaseAdapter{
             public void onClick(View view) {
                 if (bean == null)
                     return;
-                Intent intent = new Intent(
-                        mContext, ExercisesDetailActivity.class
-                );
-                intent.putExtra("id",bean.id);
-                intent.putExtra("title",bean.title);
-                mContext.startActivity(intent);
+                if (readLoginStatus()) {
+                    Intent intent = new Intent(mContext, ExercisesDetailActivity.class);
+                    intent.putExtra("id", bean.id);
+                    intent.putExtra("title", bean.title);
+                    mContext.startActivity(intent);
+                }else {
+                    Toast.makeText(mContext,"您还未登录，请先登录",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         return view;
