@@ -14,6 +14,7 @@ import java.util.List;
 
 import cn.edu.gdmec.android.boxuegu.R;
 import cn.edu.gdmec.android.boxuegu.activity.ExercisesDetailActivity;
+import cn.edu.gdmec.android.boxuegu.activity.LoginActivity;
 import cn.edu.gdmec.android.boxuegu.bean.ExercisesBean;
 
 /**
@@ -86,6 +87,8 @@ public class ExercisesAdapter extends BaseAdapter{
                     mContext.startActivity(intent);
                 }else {
                     Toast.makeText(mContext,"您还未登录，请先登录",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(mContext, LoginActivity.class);
+                    mContext.startActivity(intent);
                 }
             }
         });
